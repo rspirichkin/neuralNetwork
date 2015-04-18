@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		305CF4451ACCFBF9008254CD /* MachineLearning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305CF4441ACCFBF9008254CD /* MachineLearning.swift */; };
+		305CF4471ACCFC2E008254CD /* MachineDetermination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305CF4461ACCFC2E008254CD /* MachineDetermination.swift */; };
+		3081E29A1ACCF13000F96281 /* Structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081E2991ACCF13000F96281 /* Structure.swift */; };
 		30EB5D101AA23A6400354F90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5D0F1AA23A6400354F90 /* AppDelegate.swift */; };
-		30EB5D121AA23A6400354F90 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5D111AA23A6400354F90 /* FirstViewController.swift */; };
-		30EB5D141AA23A6400354F90 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5D131AA23A6400354F90 /* SecondViewController.swift */; };
+		30EB5D121AA23A6400354F90 /* SearchFirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5D111AA23A6400354F90 /* SearchFirstVC.swift */; };
+		30EB5D141AA23A6400354F90 /* LearnSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5D131AA23A6400354F90 /* LearnSecondVC.swift */; };
 		30EB5D171AA23A6400354F90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30EB5D151AA23A6400354F90 /* Main.storyboard */; };
 		30EB5D191AA23A6400354F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30EB5D181AA23A6400354F90 /* Images.xcassets */; };
 		30EB5D1C1AA23A6400354F90 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30EB5D1A1AA23A6400354F90 /* LaunchScreen.xib */; };
 		30EB5D281AA23A6400354F90 /* BMATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5D271AA23A6400354F90 /* BMATests.swift */; };
+		30EB5D321AA24E2300354F90 /* SignalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5D311AA24E2300354F90 /* SignalCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +31,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		305CF4441ACCFBF9008254CD /* MachineLearning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineLearning.swift; sourceTree = "<group>"; };
+		305CF4461ACCFC2E008254CD /* MachineDetermination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineDetermination.swift; sourceTree = "<group>"; };
+		3081E2991ACCF13000F96281 /* Structure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structure.swift; sourceTree = "<group>"; };
 		30EB5D0A1AA23A6400354F90 /* BMA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BMA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EB5D0E1AA23A6400354F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30EB5D0F1AA23A6400354F90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		30EB5D111AA23A6400354F90 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		30EB5D131AA23A6400354F90 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		30EB5D111AA23A6400354F90 /* SearchFirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFirstVC.swift; sourceTree = "<group>"; };
+		30EB5D131AA23A6400354F90 /* LearnSecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnSecondVC.swift; sourceTree = "<group>"; };
 		30EB5D161AA23A6400354F90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30EB5D181AA23A6400354F90 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		30EB5D1B1AA23A6400354F90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		30EB5D211AA23A6400354F90 /* BMATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BMATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EB5D261AA23A6400354F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30EB5D271AA23A6400354F90 /* BMATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMATests.swift; sourceTree = "<group>"; };
+		30EB5D311AA24E2300354F90 /* SignalCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +87,14 @@
 		30EB5D0C1AA23A6400354F90 /* BMA */ = {
 			isa = PBXGroup;
 			children = (
-				30EB5D0F1AA23A6400354F90 /* AppDelegate.swift */,
-				30EB5D111AA23A6400354F90 /* FirstViewController.swift */,
-				30EB5D131AA23A6400354F90 /* SecondViewController.swift */,
 				30EB5D151AA23A6400354F90 /* Main.storyboard */,
+				30EB5D0F1AA23A6400354F90 /* AppDelegate.swift */,
+				30EB5D111AA23A6400354F90 /* SearchFirstVC.swift */,
+				30EB5D131AA23A6400354F90 /* LearnSecondVC.swift */,
+				305CF4441ACCFBF9008254CD /* MachineLearning.swift */,
+				305CF4461ACCFC2E008254CD /* MachineDetermination.swift */,
+				30EB5D311AA24E2300354F90 /* SignalCollectionViewCell.swift */,
+				3081E2991ACCF13000F96281 /* Structure.swift */,
 				30EB5D181AA23A6400354F90 /* Images.xcassets */,
 				30EB5D1A1AA23A6400354F90 /* LaunchScreen.xib */,
 				30EB5D0D1AA23A6400354F90 /* Supporting Files */,
@@ -215,9 +227,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30EB5D141AA23A6400354F90 /* SecondViewController.swift in Sources */,
+				30EB5D141AA23A6400354F90 /* LearnSecondVC.swift in Sources */,
+				305CF4451ACCFBF9008254CD /* MachineLearning.swift in Sources */,
 				30EB5D101AA23A6400354F90 /* AppDelegate.swift in Sources */,
-				30EB5D121AA23A6400354F90 /* FirstViewController.swift in Sources */,
+				3081E29A1ACCF13000F96281 /* Structure.swift in Sources */,
+				305CF4471ACCFC2E008254CD /* MachineDetermination.swift in Sources */,
+				30EB5D321AA24E2300354F90 /* SignalCollectionViewCell.swift in Sources */,
+				30EB5D121AA23A6400354F90 /* SearchFirstVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +427,7 @@
 				30EB5D2D1AA23A6400354F90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		30EB5D2E1AA23A6400354F90 /* Build configuration list for PBXNativeTarget "BMATests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +436,7 @@
 				30EB5D301AA23A6400354F90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
