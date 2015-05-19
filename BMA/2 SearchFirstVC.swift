@@ -1,15 +1,13 @@
 //
-//  SecondViewController.swift
+//  FirstViewController.swift
 //  BMA
 //
 //  Created by Roman Spirichkin on Feb/28/15.
 //  Copyright (c) 2015 RomanSpirichkinOrganization. All rights reserved.
 //
-
 import UIKit
 
-
-class SecondViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class FirstViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     @IBOutlet weak var subView: SubView!
     @IBOutlet weak var signalCollectionView: UICollectionView!
@@ -36,8 +34,8 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UICollectionV
         signalCollectionView.layer.borderWidth = 2
         
         constraintFromTopToView.constant = constH.constant/3
-        constraintFromViewToButton.constant = constH.constant*5/3
-        constraintFromButtonToView.constant = -constH.constant*7/3
+        constraintFromViewToButton.constant = constH.constant/3
+        constraintFromButtonToView.constant = constH.constant/3
         buttonDetermination.titleLabel?.font = UIFont(name: "HelveticaNeue-UltraLight", size: CGFloat(constH.constant*3/4))
         buttonDetermination.backgroundColor = SeaFoam
         buttonDetermination.layer.borderColor = AquaCG
@@ -51,30 +49,30 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UICollectionV
         outputView.layer.borderColor = AquaCG
         outputView.layer.cornerRadius = 13
         outputView.layer.borderWidth = 2
-        
+
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [GrayCG, SeaFoamCG]
         gradient.locations = [0.5, 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.frame = CGRect(x: 0.0, y: self.view.frame.size.height/4, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
         self.subView.layer.insertSublayer(gradient, atIndex: 0)
         let gradient2: CAGradientLayer = CAGradientLayer()
         gradient2.colors = [SeaFoamCG, GrayCG]
         gradient2.locations = [0.0, 0.5]
         gradient2.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient2.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient2.frame = CGRect(x: 0.0, y: self.view.frame.size.height*3/4, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
+        gradient2.frame = CGRect(x: 0.0, y: self.view.frame.size.height/2, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
         self.subView.layer.insertSublayer(gradient2, atIndex: 0)
     }
     
     private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             return CGSize(width: (signalCollectionView.bounds.width - CGFloat(sectionInsets.left*CGFloat(n*2)))/CGFloat(n), height: (signalCollectionView.bounds.height - CGFloat(sectionInsets.left*CGFloat(h*2)))/CGFloat(h))
     }
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
             return sectionInsets
     }
     
@@ -93,24 +91,37 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UICollectionV
         return newCell
     }
     
-    @IBAction func actionLearn(sender: AnyObject) {
-        var signalsIn = [Node]()
+    @IBAction func actionSearch(sender: AnyObject) {
+        var signals = [Node]()
         for j in 0..<h {
             for i in 0..<n {
-                var Sr = (signalCollectionView.cellForItemAtIndexPath(NSIndexPath(forRow: i, inSection: j)) as! SignalCollectionViewCell).textField.text.toDouble()!
-                signalsIn.append(Node(value: Sr, Uout: Sr))
+                var S1r = (signalCollectionView.cellForItemAtIndexPath(NSIndexPath(forRow: i, inSection: j)) as! SignalCollectionViewCell).textField.text.toDouble()!
+                signals.append(Node(value: S1r, Uout: S1r))
             }
         }
-        var signalsOut = [Node]()
+        var pairTemp = Pair(arrayS1: signals, arrayS2: signals)
+        var signalsTemp = pairTemp.arrayS1
+        /*/  !!!
+        var arrayS1 = [Node]()
         for j in 0..<h {
             for i in 0..<n {
-                signalsOut.append(Node(value:(outputView.cellForItemAtIndexPath(NSIndexPath(forRow: i, inSection: j)) as! SignalCollectionViewCell).textField.text.toDouble()!))
+                var S1r : Double = 10.0 * Double(i) + Double(i)
+                arrayS1.append(Node(value: S1r, Uout: S1r))
             }
         }
-        machineLearning(model: &model, signalsIn: signalsIn, signalsOut: signalsOut)
+        var p2 = Pair(arrayS1: arrayS1, arrayS2: arrayS1)
+        var ar = p2.arrayS1
+        let signalsOut = machineDetermination(&model, ar)
+        //  !!!
+*/
+        let signalsOut = machineDetermination(&model, signalsTemp)
+        for j in 0..<h {
+            for i in 0..<n {
+                (outputView.cellForItemAtIndexPath(NSIndexPath(forRow: i, inSection: j)) as! SignalCollectionViewCell).textField.text = signalsOut[j*n + i].value.format(".0")
+            }
+        }
         signalCollectionView.backgroundColor = UIColor.redColor()
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning() }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -120,11 +131,8 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UICollectionV
         else { textField.resignFirstResponder(); self.view.endEditing(true) }
         return true
     }
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        (signalCollectionView.viewWithTag(n*h-1) as! SignalCollectionViewCell).textField.becomeFirstResponder()
-        (signalCollectionView.viewWithTag(n*h-1) as! SignalCollectionViewCell).textField.resignFirstResponder()
-        signalCollectionView.backgroundColor = UIColor.grayColor()
-    }
 }
+
+
+
 

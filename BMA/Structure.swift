@@ -26,62 +26,85 @@ class Matrix {
     }
 }
 
-class Node {
-    var value, Uin, Uout : Double
+struct Node {
+    var value, Uin: Double
+    var Uout : Double
     init(value: Double = 0, Uin: Double = 0, Uout: Double = 0) {
         self.value = value
         self.Uin = Uin
         self.Uout = Uout
     }
+    mutating func setUout (newUout : Double) {
+       self.Uout = newUout
+    }
+    mutating func setUin (newUin : Double) {
+        self.Uout = newUin
+    }
 }
 
 class Pair {
-    var arrayM1, arrayM2 : [Node]
-    var pairImaxM1, pairIminM1 : Double
-    init(arrayM1 : [Node], arrayM2 : [Node]) {
-        self.arrayM1 = arrayM1
-        self.arrayM2 = arrayM2
-        pairImaxM1 = arrayM1[0].value
-        pairIminM1 = arrayM1[0].value
-        for a in arrayM1 {
+    var arrayS1, arrayS2 : [Node]
+    var pairImaxM1, pairIminM1 : Double?
+    init(arrayS1 : [Node], arrayS2 : [Node]) {
+        self.arrayS1 = arrayS1
+        self.arrayS2 = arrayS2
+        self.Imaxmin()
+        normalization()
+        self.Imaxmin()
+    }
+    private func Imaxmin() {
+        pairImaxM1 = self.arrayS1[0].value
+        pairIminM1 = arrayS1[0].value
+        for a in arrayS1 {
             if pairImaxM1 < a.value { pairImaxM1 = a.value }
             if pairIminM1 > a.value { pairIminM1 = a.value }
         }
     }
-}
-
-class Module10 {
-    var Zlayer, Ylayer : [Node]
-    var bLinks, tLinks : Matrix
-    var R : Int
-    init (n: Int, m: Int) {
-        Zlayer = [Node](count: n, repeatedValue: Node())
-        Ylayer = [Node](count: m, repeatedValue: Node())
-        self.R = 0
-        bLinks = Matrix(rows: m, columns: n)
-        tLinks = Matrix(rows: m, columns: n)
+    private func normalization() {
+        for i in 0..<self.arrayS1.count {
+            self.arrayS1[i].value /= self.pairImaxM1!
+            self.arrayS1[i].Uout /= self.pairImaxM1!
+        }
     }
 }
 
-class Module1 {
+
+
+
+struct Module10 {
+    var Zlayer, Ylayer : [Node]
+    var bLinks, tLinks : Matrix
+    var p : Double
+    init (n: Int, m: Int) {
+        Zlayer = [Node](count: n, repeatedValue: Node())
+        Ylayer = [Node](count: m, repeatedValue: Node())
+        bLinks = Matrix(rows: m, columns: n)
+        tLinks = Matrix(rows: m, columns: n)
+        p = 0.5
+    }
+    mutating func assign (i : Int, value : Double) {
+        Zlayer[i].setUout(value)// (value)
+    }
+}
+
+struct Module1 {
     var M11, M12 : Module10
     var Slayer, Xlayer : [Node]
-    var p1, p11, p12 : Double
-    var R : Int
+    var p1 : Double
     init (n: Int, m: Int) {
         M11 = Module10(n: n, m: m)
         M12 = Module10(n: n, m: m)
         Xlayer = [Node](count: m, repeatedValue: Node())
         Slayer = [Node](count: n, repeatedValue: Node())
-        p1 = 1.0; p11 = 0.5; p12 = 0.5  // p1 - ?
-        R = 0
+        p1 = 1.0    // p1 - ?
     }
 }
 
-class Module2 {
+struct Module2 {
     var Ylayer, Zlayer, Slayer : [Node]
     var VLinks, WLinks : Matrix
-    var R, G1, G2 : Int
+    var p2 : Double
+    var L : Double
     init (k: Int, m: Int) {
         Ylayer = [Node](count: m, repeatedValue: Node())
         Zlayer = [Node](count: k, repeatedValue: Node())
@@ -93,49 +116,63 @@ class Module2 {
             }
         }
         WLinks = Matrix(rows: k, columns: m)
-        R = 0; G1 = 0; G2 = 0
+        p2 = 0.0    // p2 - ?
+        L = 2.0
     }
 }
 
 class Model {
     var M1 : Module1
     var M2 : Module2
-    var pairs : [Pair]
-    var ImaxM1, IminM1 : Double?
     var Player : [Node]
     var H1Links, H2Links, Q1Links, Q2Links : Matrix
-    var Y1j, Y2g : Int?     // Winning neurons
-    var G : Int
-    var L : Double
-    var p2 : Double
+    var Y1j, Y3g : Int?     // Winning neurons
+    var pairs : [Pair]
+    var ImaxM1, IminM1 : Double?
     var P1ft, P2ft : Int
     init (n: Int, k: Int, m: Int) {
         M1 = Module1(n: n, m: m)
         M2 = Module2(k: k, m: m)
-        pairs = [Pair]()
         Player = [Node](count: m, repeatedValue: Node())
         H1Links = Matrix(rows: m, columns: m)
         H2Links = Matrix(rows: m, columns: m)
         Q1Links = Matrix(rows: m, columns: m)
         Q2Links = Matrix(rows: m, columns: m)
-        self.G = 0
-        self.L = 2.0
-        p2 = 0.0    // p2 - ?
+        pairs = [Pair]()
         P1ft = 0
         P2ft = 0
     }
-    func appendPair(#arrayM1 : [Node], arrayM2 : [Node]) {
-        var newPair = Pair(arrayM1: arrayM1, arrayM2: arrayM2)
+    func appendPair(newPair : Pair) {
+        
+        var point = Point(x: 0.0, y: 0.0)
+        point.moveToTheRightBy(200.0)
+        var points : [Point] = []
+        points.append(Point(x: 10.0, y: 10.0) )
+        points[0].moveToTheRightBy(20.0)
+        
+        
+        
+        newPair.Imaxmin()
         // NB not let ?
         if let Imax = ImaxM1 {
-            if ImaxM1! < newPair.pairImaxM1 { ImaxM1! = newPair.pairImaxM1 }
-            if IminM1! < newPair.pairIminM1 { IminM1! = newPair.pairIminM1 }
+            if ImaxM1! < newPair.pairImaxM1 { ImaxM1! = newPair.pairImaxM1! }
+            if IminM1! > newPair.pairIminM1 { IminM1! = newPair.pairIminM1! }
         }
         else {
             ImaxM1 = newPair.pairImaxM1
             IminM1 = newPair.pairIminM1
         }
         self.pairs.append(newPair)
-        self.M1.Slayer = arrayM1
+        self.M1.Slayer = newPair.arrayS1
     }
 }
+
+
+struct Point {
+    var x, y: Double
+    
+    mutating func moveToTheRightBy(dx: Double) {
+        x += dx
+    }
+}
+

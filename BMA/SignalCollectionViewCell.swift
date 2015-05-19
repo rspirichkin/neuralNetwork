@@ -69,7 +69,8 @@ class SubView : UIScrollView {
 
 var n = 5
 let h = 2
-var model = Model(n: 10, k: 10, m: 30)
+var model = Model(n: 10, k: 10, m: 20)
+var pairs = [Pair]()
 
 let WhiteCG = UIColor.whiteColor().CGColor
 let SeaFoam = UIColor(red: 0, green: 1, blue: 0.5, alpha: 1)
@@ -81,6 +82,12 @@ let Gray = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1); let GrayCG = G
 extension String {
     func toDouble() -> Double? {
         return NSNumberFormatter().numberFromString(self)?.doubleValue
+    }
+}
+
+extension Double {
+    func format(f: String) -> String {
+        return NSString(format: "%\(f)f", self) as String
     }
 }
 
