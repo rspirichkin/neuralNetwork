@@ -95,7 +95,7 @@ class LearnViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         if collectionView.tag == 100 {
             return CGSize(width: (collectionViewM1.bounds.width - CGFloat(sectionInsets.left*CGFloat(n*2)))/CGFloat(n), height: (collectionViewM1.bounds.height - CGFloat(sectionInsets.left*CGFloat(h*2)))/CGFloat(h)) }
         if collectionView.tag == 101 {
-            return CGSize(width: (collectionViewM1.bounds.width - CGFloat(sectionInsets.left*CGFloat(k*2)))/CGFloat(k), height: (collectionViewM1.bounds.height - CGFloat(sectionInsets.left*CGFloat(k*2)))/CGFloat(h)) }
+            return CGSize(width: (collectionViewM1.bounds.width - CGFloat(sectionInsets.left*CGFloat(k*2)))/CGFloat(k), height: (collectionViewM1.bounds.height - CGFloat(sectionInsets.left*CGFloat(h*2)))/CGFloat(h)) }
         return CGSize(width: (collectionViewM1.bounds.width - CGFloat(sectionInsets.left*CGFloat(n*2)))/CGFloat(n), height: (collectionViewM1.bounds.height - CGFloat(sectionInsets.left*CGFloat(h*2)))/CGFloat(h))
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
