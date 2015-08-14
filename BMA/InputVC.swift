@@ -62,11 +62,11 @@ class InputViewController: UIViewController, UITextFieldDelegate {
         pairs.removeAll(keepCapacity: true)
         
         if let vc = self.parentViewController {
-            if let vc0 = vc.childViewControllers[1] as? LearnViewController {
+            if let vc0 = vc.childViewControllers[0] as? LearnViewController {
                 vc0.loadView()
                 vc0.viewDidLoad()
             }
-            if let vc1 = vc.childViewControllers[2] as? SearchViewController {
+            if let vc1 = vc.childViewControllers[1] as? SearchViewController {
                 vc1.loadView()
                 vc1.viewDidLoad()
                 vc1.view.backgroundColor = UIColor.redColor()
